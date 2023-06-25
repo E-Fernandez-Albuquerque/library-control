@@ -2,51 +2,63 @@
 #include "menu.h"
 #include "crudOptions.h"
 #include <unistd.h>
+#include <windows.h>
 
 int main() {
-	
+	//DECLARACAO DE VARIAVEIS
+	int opcao;
 	FILE *file;
 	
 	file = fopen("savedata.txt", "a");
 	if (file == NULL){
 		file = fopen("savedata.txt", "w");
 	};
-	int opcao = menu();
 
+	fclose(file);
+	
+	char ch;
+	
+	file = fopen("savedata.txt", "r");
+
+	//DECLARACAO DE STRUCTS
 	struct books {
-		char isbn[14];
-		char title[120];
-		char author[60];
+		int ID;
+		char isbn[22];
+		char title[150];
+		char author[80];
 		char year[5];
 		char pages[5];
-		char language[6];
+		char language[20];
+		char publisher[40];
 	};
 	
 	struct books book;
 	
-	switch(opcao){
-		case 1:
-			printf("--- Cadastrar novo livro ---");
-			sleep(1);	
-			bookCreate(book.title, book.author, book.isbn, book.year, book.pages, book.language, file);
-			break;
-		case 2:
-			printf("--- Ver biblioteca ---");
-			bookView();
-			break;
-		case 3:
-			printf("--- Atualizar registro de livro ---");
-			bookUpdate();
-			break;
-		case 4:
-			printf("--- Deletar livro ---");
-			bookDelete();
-			break;
-		case 5:
-			printf("--- Finalizando o programa ---");
-			fclose(file);
-			
-			
-	}
+	//MAIN LOOP
+	do{
+		opcao = menu();
+		switch(opcao){
+			case 1:
+				printf("\n--- Cadastrar novo livro ---\n");	
+				bookCreate();
+				break;
+			case 2:
+				printf("\n--- Ver biblioteca ---\n");
+				showAll();
+				break;
+			case 3:
+				printf("\n--- Atualizar registro de livro ---\n");
+				bookUpdate();
+				break;
+			case 4:
+				printf("\n--- Deletar livro ---\n");
+				bookDelete();
+				break;
+			case 5:
+				printf("\n--- Finalizando o programa ---");
+				return 0;
+				break;
+		}
+	} while (opcao != 5);
 }
 

@@ -1,2 +1,4 @@
-A arte da guerra,Sun Tzu,1245,333,pt-br,12-963-6666-4
-Harry Potter e a pedra filosofal,J. K. Rowling,2006,524,pt-br,22-578-3438-9
+
+1, Linux: A biblia, Christopher Negus, Alta Books, 2014, 852, pt-br, 978-85-7608-799-1
+2, Manejo ecologico de pragas e doencas, Ana Primavesi, Expressao popular, 2016, 143, pt-br, 978-85-7743-286-8
+3, Tecnicas de invasao, Bruno Fraga, Labrador, 2019, 296, pt-br, 978-65-5044-018-3

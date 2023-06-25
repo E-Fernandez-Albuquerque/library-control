@@ -9,7 +9,24 @@ enum categories {
 	fiction = 1, nonfiction, adventure, classic, crime, fantasy, horror, historicalfiction, humour, mystery, poetry, romance, thriller, war, autobiography, selfhelp, biography 
 };
 
-void bookCreate(char title[120], char author[60], char isbn[14], char year[5], char pages[5], char language[6], FILE *file) {
+void bookCreate() {
+	
+	FILE *file;
+	
+	file = fopen("savedata.txt", "a");
+	if (file == NULL){
+		file = fopen("savedata.txt", "w");
+	};
+	
+	int ID;
+	char isbn[22];
+	char title[150];
+	char author[80];
+	char year[5];
+	char pages[5];
+	char language[20];
+	char publisher[40];
+	
 	do {
 		printf("\nInsira os dados do livro que deseja registrar: ");
 		
@@ -23,6 +40,10 @@ void bookCreate(char title[120], char author[60], char isbn[14], char year[5], c
 //		scanf("%s", book.author);
 		fgets(author, 60, stdin);
 		removeBreakRow(author);
+		
+		printf("Editora: ");
+		fgets(publisher, 40, stdin);
+		removeBreakRow(publisher);
 		
 		printf("Ano de publicacao: ");
 		scanf("%s", year);
@@ -38,11 +59,11 @@ void bookCreate(char title[120], char author[60], char isbn[14], char year[5], c
 		
 		system("cls");
 		
-		printf("\nAs informações estao corretas?");
-		printf("\nInserir o livro nos registros?\n");
+		printf("As informações estao corretas?");
 
-		printf("Titulo: %s\n", title);
+		printf("\nTitulo: %s\n", title);
 		printf("Autor: %s\n", author);
+		printf("Editora: %s\n", publisher);
 		printf("Ano de publicacao: %s\n", year);
 		printf("Numero de paginas: %s\n", pages);
 		printf("Lingua: %s\n", language);
@@ -57,22 +78,45 @@ void bookCreate(char title[120], char author[60], char isbn[14], char year[5], c
 	printf(".");
 	sleep(1);
 	printf(".");
-	fprintf(file, "%s,%s,%s,%s,%s,%s\n", title, author, year, pages, language, isbn);
-	printf("\nSucesso.");
+	sleep(1);
+	fprintf(file, "\n%d, %s, %s, %s, %s, %s, %s, %s", newID(), title, author, publisher, year, pages, language, isbn);
+	printf("\nSucesso.\n\n");
+	sleep(1);
+	fclose(file);
+	system("cls");
 }
 
-int library() {
-	return 0;
+
+
+
+
+void showAll() {
+	FILE *file;
+	char ch;
+	
+	file = fopen("savedata.txt", "r");
+	
+	if (file == NULL){
+		printf("Arquivo inexistente.");
+		sleep(1);
+	};
+	
+	while (!feof(file)){
+		fscanf(file, "%c", &ch);
+		printf("%c", ch);
+	}
+	printf("\n");
+	system("pause");
+	system("cls");
 }
 
-int bookView() {
-	return 0;
+void bookView() {
 }
 
-int bookDelete() {
-	return 0;
+void bookDelete() {
 }
 
-int bookUpdate() {
-	return 0;
+void bookUpdate() {
+	
+	newID();
 }
