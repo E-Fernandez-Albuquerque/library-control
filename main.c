@@ -47,7 +47,6 @@ int main() {
 				// LOOP DE VERIFICA플O
 				do{
 					printf("----------------------------- Cadastrar novo livro -----------------------------\n");
-					
 					// INSERINDO INFORMA합ES
 					printf("\nTitulo: ");
 					getchar();
@@ -98,10 +97,16 @@ int main() {
 				// INVOCA플O DA FUN플O QUE REALIZA A LEITURA DOS REGISTROS
 				showAll(file);
 				break;
-			case 3: //TODO
+			case 3: {
+				char idUpdate[4];
 				printf("\n--- Atualizar registro de livro ---\n");
-				bookUpdate();
+				file = fopen("savedata.txt", "r");
+				printf("Insira o ID do livro que deseja modificar: ");
+				scanf("%s", idUpdate);
+				bookUpdate(file, idUpdate);
 				break;
+			}
+				
 			case 4: //TODO
 				printf("\n--- Deletar livro ---\n");
 				bookDelete();

@@ -41,3 +41,52 @@ int newID(FILE *file){
 	
 	return newID;
 }
+
+
+void getBook(FILE *file, char id[]){
+	int i;
+	char searchID[4];
+	char ch;
+	
+	do{
+		fscanf(file, "%c", &ch);
+		if(ch == '\n'){
+			for(i=0; i<4; i++){
+				ch = getc(file);
+				if (ch > '9' || ch < '0'){
+					break;
+				}
+				searchID[i] = ch;	
+				printf("%c", searchID[i]);		
+			}
+		}
+	} while (strcmp(searchID,id) != 0 && !feof(file));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
