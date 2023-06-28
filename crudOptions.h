@@ -74,6 +74,6 @@ void bookDelete() {
 	//TODO
 }
 
-void bookUpdate(FILE *file, char id[]) {
-	getBook(file, id);
+int bookUpdate(FILE *file, char id[]) {
+	return getBook(file, id);
 }

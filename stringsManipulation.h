@@ -43,10 +43,12 @@ int newID(FILE *file){
 }
 
 
-void getBook(FILE *file, char id[]){
+int getBook(FILE *file, char id[]){
 	int i;
 	char searchID[4];
+	char selected[333];
 	char ch;
+	int mod;
 	
 	do{
 		fscanf(file, "%c", &ch);
@@ -56,12 +58,50 @@ void getBook(FILE *file, char id[]){
 				if (ch > '9' || ch < '0'){
 					break;
 				}
-				searchID[i] = ch;	
-				printf("%c", searchID[i]);		
+				searchID[i] = ch;		
 			}
 		}
 	} while (strcmp(searchID,id) != 0 && !feof(file));
+	
+	if (feof(file)){
+		printf("Livro nao encontrado.");
+		return -1;
+	}
+	else {
+		printf("Livro encontrado: \nID:");
+		for (i=0; i<4; i++){
+			printf("%c", searchID[i]);
+		}
+		ch = getc(file);
+		printf("\n");
+		i=0;
+		while (ch != '\n'){
+			printf("%c", ch);
+			ch = getc(file);
+			selected[i] = ch;
+			i++;
+		}
+		printf("\n");
+		printf("-------------------------------------------------------------------------------\n");
+		
+		printf("Qual informacao deseja modificar?");
+		printf("\n1 - Titulo");
+		printf("\n2 - Autor");
+		printf("\n3 - Editora");
+		printf("\n4 - Ano");
+		printf("\n5 - Numero de paginas");
+		printf("\n6 - Lingua");
+		printf("\n7 - ISBN");
+		printf("\n0 - Para cancelar a operacao");
+		printf("\n>>> ");
+		
+		scanf("%d", &mod);
+		return mod;
+	}
+	
 }
+
+
 
 
 

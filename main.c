@@ -36,7 +36,10 @@ int main() {
 	do{
 		option = menu();
 		switch(option){
-			case 1: // INSERIR REGISTRO
+			case 1: {
+				// INSERIR REGISTRO
+			
+				system("cls");
 				
 				// ABRIR ARQUIVO
 				file = fopen("savedata.txt", "a");
@@ -82,8 +85,11 @@ int main() {
 				// FECHAMENTO DO ARQUIVO
 				fclose(file);
 				break;
+			}
 								
-			case 2: // VISUALIZAR REGISTROS
+			case 2: {
+				// VISUALIZAR REGISTROS
+				system("cls");
 				printf("\n--- Ver biblioteca ---\n");
 				
 				// ABERTURA DO ARQUIVO
@@ -97,13 +103,82 @@ int main() {
 				// INVOCAÇÃO DA FUNÇÃO QUE REALIZA A LEITURA DOS REGISTROS
 				showAll(file);
 				break;
+			}
+			
 			case 3: {
-				char idUpdate[4];
-				printf("\n--- Atualizar registro de livro ---\n");
-				file = fopen("savedata.txt", "r");
+				book bup;
+				int update;
+				char idUpdate[4];	
+				file = fopen("savedata.txt", "r");	
+										
+				system("cls");
+			
+				printf("----------------------------- Atualizar informacoes de registro -----------------------------\n");
+				
 				printf("Insira o ID do livro que deseja modificar: ");
 				scanf("%s", idUpdate);
-				bookUpdate(file, idUpdate);
+				update = bookUpdate(file, idUpdate);
+				
+				switch(update){
+					case 1: {
+						printf("Qual o novo titulo do livro? ");
+						
+						getchar();
+						fgets(bup.title, 120, stdin);
+//						updateTitle(file, bup.title);
+						break;
+					}
+					
+					case 2: {
+						printf("Qual o autor do livro? ");
+						
+						getchar();
+						fgets(bup.author, 120, stdin);
+						
+//						updateTitle(file, bup.title);						
+						break;
+					}
+					
+					case 3: {
+						printf("Qual a editora do livro? ");
+						
+						getchar();
+						fgets(bup.publisher, 120, stdin);
+						
+//						updateTitle(file, bup.title);						
+						break;
+					}
+					
+					case 4: {
+						printf("Ano de publicacao: ");
+						scanf("%s", bup.year);						
+						break;
+					}
+					
+					case 5: {
+						printf("Paginas: ");
+						scanf("%s", bup.pages);						
+						break;
+					}
+					
+					case 6: {
+						printf("Lingua: ");
+						scanf("%s", bup.language);						
+						break;
+					}
+					
+					case 7: {
+						printf("ISBN: ");
+						scanf("%s", bup.isbn);
+						break;
+					}
+					
+					default: {
+						system("cls");
+						break;
+					}
+				}
+				
 				break;
 			}
 				
