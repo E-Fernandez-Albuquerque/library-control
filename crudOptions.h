@@ -5,9 +5,9 @@
 
 int confirmation;
 
-enum categories {
-	fiction = 1, nonfiction, adventure, classic, crime, fantasy, horror, historicalfiction, humour, mystery, poetry, romance, thriller, war, autobiography, selfhelp, biography 
-};
+//enum categories {
+//	fiction = 1, nonfiction, adventure, classic, crime, fantasy, horror, historicalfiction, humour, mystery, poetry, romance, thriller, war, autobiography, selfhelp, biography 
+//};
 
 void bookCreate(FILE *file, char title[], char author[], char year[], char pages[], char language[], char publisher[], char isbn[]) {	
 
@@ -28,7 +28,7 @@ void bookCreate(FILE *file, char title[], char author[], char year[], char pages
 	removeBreakRow(publisher);
 	
 	// ESCREVENDO EM ARQUIVO
-	fprintf(file, "\n%d, %s, %s, %s, %s, %s, %s, %s", newID(file_r), title, author, publisher, year, pages, language, isbn);
+	fprintf(file, "\n%d, %s, %s, %s, %s, %s, %s, %s;", newID(file_r), title, author, publisher, year, pages, language, isbn);
 	
 	//FECHAMENTO DO ARQUIVO DE LEITURA
 	fclose(file_r);
@@ -75,5 +75,42 @@ void bookDelete() {
 }
 
 int bookUpdate(FILE *file, char id[]) {
-	return getBook(file, id);
+	int i, mod;
+	book b;
+	b = getBook(file, id);
+	
+	printf("\nTitulo: ");
+	for (i=0; i<strlen(b.title); i++){
+		printf("%c", b.title[i]);
+	}
+	
+	printf("\nAutor: ");
+	for (i=0; i<strlen(b.author); i++){
+		printf("%c", b.author[i]);
+	}
+
+	printf("\nEditora: ");
+	for (i=0; i<strlen(b.publisher); i++){
+		printf("%c", b.publisher[i]);
+	}
+
+	printf("\nAno de publicacao: ");
+	for (i=0; i<strlen(b.year); i++){
+		printf("%c", b.year[i]);
+	}
+
+	printf("\nNumero de paginas: ");
+	for (i=0; i<strlen(b.pages); i++){
+		printf("%c", b.pages[i]);
+	}
+	
+	printf("\nLingua: ");
+	for (i=0; i<strlen(b.language); i++){
+		printf("%c", b.language[i]);
+	}
+	
+	printf("\nISBN: ");
+	for (i=0; i<strlen(b.isbn); i++){
+		printf("%c", b.isbn[i]);
+	}
 }

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "structs.h"
 
 void removeBreakRow(char string[]){
 	// INICIALIZAÇÃO DAS VARIAVEIS
@@ -43,12 +44,12 @@ int newID(FILE *file){
 }
 
 
-int getBook(FILE *file, char id[]){
+book getBook(FILE *file, char id[]){
 	int i;
 	char searchID[4];
-	char selected[333];
 	char ch;
 	int mod;
+	book bk;
 	
 	do{
 		fscanf(file, "%c", &ch);
@@ -65,68 +66,83 @@ int getBook(FILE *file, char id[]){
 	
 	if (feof(file)){
 		printf("Livro nao encontrado.");
-		return -1;
 	}
 	else {
 		printf("Livro encontrado: \nID:");
 		for (i=0; i<4; i++){
 			printf("%c", searchID[i]);
 		}
+		
 		ch = getc(file);
-		printf("\n");
 		i=0;
-		while (ch != '\n'){
-			printf("%c", ch);
+		while (ch != ','){
 			ch = getc(file);
-			selected[i] = ch;
-			i++;
+			if (ch != ','){
+				bk.title[i] = ch;
+				i++;
+			}
 		}
-		printf("\n");
-		printf("-------------------------------------------------------------------------------\n");
 		
-		printf("Qual informacao deseja modificar?");
-		printf("\n1 - Titulo");
-		printf("\n2 - Autor");
-		printf("\n3 - Editora");
-		printf("\n4 - Ano");
-		printf("\n5 - Numero de paginas");
-		printf("\n6 - Lingua");
-		printf("\n7 - ISBN");
-		printf("\n0 - Para cancelar a operacao");
-		printf("\n>>> ");
+		ch = getc(file);
+		i=0;
+		while(ch != ','){
+			ch = getc(file);
+			if (ch != ','){
+				bk.author[i] = ch;
+				i++;
+			}
+		}
 		
-		scanf("%d", &mod);
-		return mod;
+		ch = getc(file);
+		i=0;
+		while(ch != ','){
+			ch = getc(file);
+			if (ch != ','){
+				bk.publisher[i] = ch;
+				i++;
+			}
+		}
+		
+		ch = getc(file);
+		i=0;
+		while(ch != ','){
+			ch = getc(file);
+			if (ch != ','){
+				bk.year[i] = ch;
+				i++;
+			}
+		}
+		
+		ch = getc(file);
+		i=0;
+		while(ch != ','){
+			ch = getc(file);
+			if (ch != ','){
+				bk.pages[i] = ch;				
+				i++;
+			}
+		}
+		
+		ch = getc(file);
+		i=0;
+		while(ch != ','){
+			ch = getc(file);
+			if (ch != ','){
+				bk.language[i] = ch;
+				i++;
+			}
+		}
+		
+		ch = getc(file);
+		i=0;
+		while(ch != ';'){
+			ch = getc(file);
+			if (ch != ';'){
+				bk.isbn[i] = ch;
+				i++;
+			}
+		}
 	}
-	
+	return bk;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

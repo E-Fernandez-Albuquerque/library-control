@@ -3,6 +3,7 @@
 #include "crudOptions.h"
 #include <unistd.h>
 #include <windows.h>
+#include "structs.h"
 
 int main() {
 	//DECLARACAO DE VARIAVEIS
@@ -18,19 +19,19 @@ int main() {
 	
 	char ch;
 
-	//DECLARACAO DE STRUCTS
-	struct books {
-		int ID;
-		char isbn[22];
-		char title[150];
-		char author[80];
-		char year[5];
-		char pages[5];
-		char language[20];
-		char publisher[40];
-	};
+//	//DECLARACAO DE STRUCTS
+//	struct books {
+//		int ID;
+//		char isbn[22];
+//		char title[150];
+//		char author[80];
+//		char year[5];
+//		char pages[5];
+//		char language[20];
+//		char publisher[40];
+//	};
 	
-	typedef struct books book;
+//	typedef struct books book;
 	
 	//MAIN LOOP
 	do{
@@ -106,78 +107,13 @@ int main() {
 			}
 			
 			case 3: {
-				book bup;
-				int update;
-				char idUpdate[4];	
-				file = fopen("savedata.txt", "r");	
-										
-				system("cls");
-			
-				printf("----------------------------- Atualizar informacoes de registro -----------------------------\n");
+				printf("----------------------------- Atualizacao de registros -----------------------------\n");
+				file = fopen("savedata.txt", "r");
+				char id[5];
 				
-				printf("Insira o ID do livro que deseja modificar: ");
-				scanf("%s", idUpdate);
-				update = bookUpdate(file, idUpdate);
-				
-				switch(update){
-					case 1: {
-						printf("Qual o novo titulo do livro? ");
-						
-						getchar();
-						fgets(bup.title, 120, stdin);
-//						updateTitle(file, bup.title);
-						break;
-					}
-					
-					case 2: {
-						printf("Qual o autor do livro? ");
-						
-						getchar();
-						fgets(bup.author, 120, stdin);
-						
-//						updateTitle(file, bup.title);						
-						break;
-					}
-					
-					case 3: {
-						printf("Qual a editora do livro? ");
-						
-						getchar();
-						fgets(bup.publisher, 120, stdin);
-						
-//						updateTitle(file, bup.title);						
-						break;
-					}
-					
-					case 4: {
-						printf("Ano de publicacao: ");
-						scanf("%s", bup.year);						
-						break;
-					}
-					
-					case 5: {
-						printf("Paginas: ");
-						scanf("%s", bup.pages);						
-						break;
-					}
-					
-					case 6: {
-						printf("Lingua: ");
-						scanf("%s", bup.language);						
-						break;
-					}
-					
-					case 7: {
-						printf("ISBN: ");
-						scanf("%s", bup.isbn);
-						break;
-					}
-					
-					default: {
-						system("cls");
-						break;
-					}
-				}
+				printf("Qual o ID do livro que deseja modificar? ");
+				scanf("%s", id);
+				bookUpdate(file, id);
 				
 				break;
 			}
