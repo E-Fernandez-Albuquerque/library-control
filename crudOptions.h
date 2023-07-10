@@ -39,10 +39,6 @@ void bookCreate(FILE *file, char title[], char author[], char year[], char pages
 	system("cls");
 }
 
-
-
-
-
 void showAll(FILE *file) {
 	
 	// INICIALIZAÇÃO DA VARIAVEL
@@ -66,19 +62,8 @@ void showAll(FILE *file) {
 	system("cls");
 }
 
-void bookView() {
-	//TODO
-}
-
-void bookDelete() {
-	//TODO
-}
-
-int bookUpdate(FILE *file, char id[]) {
-	int i, mod;
-	book b;
-	b = getBook(file, id);
-	
+void bookDataPrint(book b){
+	int i = 0;
 	printf("\nTitulo: ");
 	for (i=0; i<strlen(b.title); i++){
 		printf("%c", b.title[i]);
@@ -113,4 +98,105 @@ int bookUpdate(FILE *file, char id[]) {
 	for (i=0; i<strlen(b.isbn); i++){
 		printf("%c", b.isbn[i]);
 	}
+	printf("\n");
+}
+
+void bookView(FILE *file, char id[]) {
+	book b;
+	b = getBook(file, id);
+	
+	bookDataPrint(b);
+}
+
+void bookDelete() {
+	//TODO
+}
+
+int bookUpdate(FILE *file, char id[]) {
+	int i, mod, updateOption;
+	book b;
+	b = getBook(file, id);
+	
+	bookDataPrint(b);
+	
+	printf("\nQual dos valores deseja modificar? ");
+	printf("\n1 - Titulo ");
+	printf("\n2 - Autor ");	
+	printf("\n3 - Editora ");
+	printf("\n4 - Ano ");
+	printf("\n5 - Paginas ");
+	printf("\n6 - Lingua ");
+	printf("\n7 - ISBN ");
+	printf("\n8 - Cancelar\n");
+	
+	printf(">>> ");
+	scanf("%d", &updateOption);
+	switch(updateOption){
+		case 1: {//TITULO
+			char newTitle[150];
+			printf("Insira o titulo: ");
+			getchar();
+			fgets(newTitle, 150, stdin);
+			removeBreakRow(newTitle);
+			strcpy(b.title, newTitle);
+			break;
+		}
+		
+		case 2: {//AUTOR
+			char newAuthor[80];
+			printf("Insira o autor: ");
+			fgets(newAuthor, 80, stdin);
+			strcpy(b.author, newAuthor);
+			break;
+		}
+		
+		case 3: {//EDITORA
+			char newPublisher[40];
+			printf("Insira a editora: ");
+			fgets(newPublisher, 40, stdin);
+			strcpy(b.publisher, newPublisher);
+			break;
+		}
+		
+		case 4: {//ANO
+			char newYear[5];
+			printf("Insira o ano de lancamento: ");
+			scanf("%s", newYear);
+			strcpy(b.year, newYear);
+			break;
+		}
+		
+		case 5: {//PAGINAS
+			char newPages[5];
+			printf("Insira o numero de paginas: ");
+			scanf("%s", newPages);
+			strcpy(b.pages, newPages);
+			break;
+		}
+		
+		case 6: {//LINGUA
+			char newLanguage[20];
+			printf("Insira a lingua: ");
+			scanf("%s", newLanguage);
+			strcpy(b.language, newLanguage);
+			break;
+		}
+		
+		case 7: {//ISBN
+			char newISBN[22];
+			printf("Insira o ISBN: ");
+			scanf("%s", newISBN);
+			strcpy(b.isbn, newISBN);
+			break;
+		}
+		
+		case 8: {//SAIR
+			break;
+		}
+		
+		default:{
+			break;
+		}
+	}
+	bookDataPrint(b);
 }

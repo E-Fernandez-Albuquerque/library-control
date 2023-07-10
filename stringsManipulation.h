@@ -43,106 +43,44 @@ int newID(FILE *file){
 	return newID;
 }
 
-
 book getBook(FILE *file, char id[]){
 	int i;
-	char searchID[4];
+	char searchID[5];
 	char ch;
 	int mod;
 	book bk;
 	
-	do{
-		fscanf(file, "%c", &ch);
-		if(ch == '\n'){
-			for(i=0; i<4; i++){
-				ch = getc(file);
-				if (ch > '9' || ch < '0'){
-					break;
-				}
-				searchID[i] = ch;		
-			}
-		}
-	} while (strcmp(searchID,id) != 0 && !feof(file));
-	
-	if (feof(file)){
-		printf("Livro nao encontrado.");
-	}
-	else {
-		printf("Livro encontrado: \nID:");
-		for (i=0; i<4; i++){
-			printf("%c", searchID[i]);
-		}
-		
-		ch = getc(file);
-		i=0;
-		while (ch != ','){
-			ch = getc(file);
-			if (ch != ','){
-				bk.title[i] = ch;
-				i++;
-			}
-		}
-		
-		ch = getc(file);
-		i=0;
-		while(ch != ','){
-			ch = getc(file);
-			if (ch != ','){
-				bk.author[i] = ch;
-				i++;
-			}
-		}
-		
-		ch = getc(file);
-		i=0;
-		while(ch != ','){
-			ch = getc(file);
-			if (ch != ','){
-				bk.publisher[i] = ch;
-				i++;
-			}
-		}
-		
-		ch = getc(file);
-		i=0;
-		while(ch != ','){
-			ch = getc(file);
-			if (ch != ','){
-				bk.year[i] = ch;
-				i++;
-			}
-		}
-		
-		ch = getc(file);
-		i=0;
-		while(ch != ','){
-			ch = getc(file);
-			if (ch != ','){
-				bk.pages[i] = ch;				
-				i++;
-			}
-		}
-		
-		ch = getc(file);
-		i=0;
-		while(ch != ','){
-			ch = getc(file);
-			if (ch != ','){
-				bk.language[i] = ch;
-				i++;
-			}
-		}
-		
-		ch = getc(file);
-		i=0;
-		while(ch != ';'){
-			ch = getc(file);
-			if (ch != ';'){
-				bk.isbn[i] = ch;
-				i++;
-			}
-		}
-	}
-	return bk;
+    do {
+        fscanf(file, "\n%[^,;]", searchID);
+        fscanf(file, "%c", &ch);
+        
+        if (strcmp(searchID, id) == 0) {
+            printf("Livro encontrado: \nID: %s\n", searchID);
+            
+            fscanf(file, " %[^,]", bk.title);
+            fscanf(file, "%c", &ch);
+            
+            fscanf(file, " %[^,]", bk.author);
+            fscanf(file, "%c", &ch);
+            
+            fscanf(file, " %[^,]", bk.publisher);
+            fscanf(file, "%c", &ch);
+            
+            fscanf(file, " %[^,]", bk.year);
+            fscanf(file, "%c", &ch);
+            
+            fscanf(file, " %[^,]", bk.pages);
+            fscanf(file, "%c", &ch);
+            
+            fscanf(file, " %[^,]", bk.language);
+            fscanf(file, "%c", &ch);
+            
+            fscanf(file, " %[^;\n]", bk.isbn);
+            
+            break;
+        }
+    } while (!feof(file));
+    
+    return bk;
 }
 

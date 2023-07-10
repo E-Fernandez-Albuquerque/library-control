@@ -10,11 +10,11 @@ int main() {
 	int option, confirmation;
 	FILE *file;
 	
+	//CRIA플O INICIAL DO ARQUIVO QUE ARMAZENA OS DADOS, SE N홒 HOUVER
 	file = fopen("savedata.txt", "a");
 	if (file == NULL){
 		file = fopen("savedata.txt", "w");
 	};
-
 	fclose(file);
 	
 	char ch;
@@ -37,8 +37,11 @@ int main() {
 	do{
 		option = menu();
 		switch(option){
-			case 1: {
-				// INSERIR REGISTRO
+			
+			// OK!!!
+			
+			case 1: {	// INSERIR REGISTRO
+				
 			
 				system("cls");
 				
@@ -87,9 +90,11 @@ int main() {
 				fclose(file);
 				break;
 			}
-								
-			case 2: {
-				// VISUALIZAR REGISTROS
+			
+			// OK!!!
+							
+			case 2: {	// VISUALIZAR TODOS OS REGISTROS
+			
 				system("cls");
 				printf("\n--- Ver biblioteca ---\n");
 				
@@ -106,27 +111,68 @@ int main() {
 				break;
 			}
 			
-			case 3: {
+			// OK!!!
+			
+			case 3: {	//PESQUISAR REGISTRO POR ID
+				system("cls");
+				printf("----------------------------- Pesquisa por ID -----------------------------\n");
+				
+				//INICIALIZA플O DE VARI햂EIS
+				char id[5];
+				file = fopen("savedata.txt", "r");
+				
+				//RECEBIMENTO DE ID A PESQUISAR
+				printf("Insira o ID do livro que quer pesquisar: ");
+				scanf("%s", id);
+				
+				//INVOCA플O DA FUN플O DE PESQUISA E EXIBI플O
+				bookView(file, id);
+				printf("\n");
+				
+				//PAUSA NO SISTEMA PARA VISUALIZA플O DO RETORNO
+				system("pause");
+				
+				//LIMPAR TERMINAL
+				system("cls");
+				break;
+			}
+			
+			// FALTANDO PARTE DE ATUALIZA플O
+			
+			case 4: {	//ATUALIZAR DADOS DE REGISTRO
+				system("cls");
 				printf("----------------------------- Atualizacao de registros -----------------------------\n");
+				
+				//INICIALIZA플O DE VARIAVEIS
 				file = fopen("savedata.txt", "r");
 				char id[5];
 				
+				//RECEBIMENTO DE ID
 				printf("Qual o ID do livro que deseja modificar? ");
 				scanf("%s", id);
+				
+				//INVOCACAO DE FUNCAO DE PESQUISA E ATUALIZA플O
 				bookUpdate(file, id);
 				
 				break;
 			}
 				
-			case 4: //TODO
-				printf("\n--- Deletar livro ---\n");
+			case 5:{ //TODO - DELETAR REGISTROS
+				char id[4];
+			
+				printf("----------------------------- Deletar registro -----------------------------\n");
+				printf("Insira o ID do livro que deseja deletar: ");
+				scanf("%s", id);
 				bookDelete();
 				break;
-			case 5: //TODO
+			}
+			// OK!!!
+			
+			case 6: //ENCERRAR O PROGRAMA
 				printf("\n--- Finalizando o programa ---");
 				return 0;
 				break;
 		}
-	} while (option != 5);
+	} while (option != 6);
 }
 
