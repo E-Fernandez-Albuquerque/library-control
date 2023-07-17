@@ -15,12 +15,11 @@ void bookCreate(FILE *file, char title[], char author[], char year[], char pages
 	FILE *file_r = fopen("savedata.txt", "r");
 	
 	// SALVANDO...
-	printf("Salvando informações.");
+	printf("Salvando informacoes.");
 	sleep(1);
 	printf(".");
 	sleep(1);
-	printf(".");
-	sleep(1);
+
 	
 	// REMOVENDO QUEBRA DE LINHA DO FGETS
 	removeBreakRow(title);
@@ -55,11 +54,6 @@ void showAll(FILE *file) {
 		fscanf(file, "%c", &ch);
 		printf("%c", ch);
 	}
-	
-	//PAUSE NO SISTEMA E LIMPEZA DE TELA PARA RETORNAR AO MENU
-	printf("\n\n");
-	system("pause");
-	system("cls");
 }
 
 void bookDataPrint(book b){
@@ -108,14 +102,19 @@ void bookView(FILE *file, char id[]) {
 	bookDataPrint(b);
 }
 
-void bookDelete() {
-	//TODO
+
+
+void bookDelete(FILE *file, char id[]) {
+	
 }
+
+
 
 int bookUpdate(FILE *file, char id[]) {
 	int i, mod, updateOption;
 	book b;
 	b = getBook(file, id);
+	FILE *temp;
 	
 	bookDataPrint(b);
 	
@@ -198,5 +197,10 @@ int bookUpdate(FILE *file, char id[]) {
 			break;
 		}
 	}
-	bookDataPrint(b);
+	
+//	temp = fopen("save")
+	
 }
+
+
+
