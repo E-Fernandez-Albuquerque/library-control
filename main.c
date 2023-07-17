@@ -113,6 +113,7 @@ int main() {
 				//PAUSE NO SISTEMA E LIMPEZA DE TELA PARA RETORNAR AO MENU
 				printf("\n\n");
 				system("pause");
+				fclose(file);
 				system("cls");
 				break;
 			}
@@ -138,6 +139,8 @@ int main() {
 				//PAUSA NO SISTEMA PARA VISUALIZAÇÃO DO RETORNO
 				system("pause");
 				
+				fclose(file);
+				
 				//LIMPAR TERMINAL
 				system("cls");
 				break;
@@ -161,8 +164,6 @@ int main() {
 				printf("----------------------------- Atualizacao de registros -----------------------------\n");
 			
 				file = fopen("savedata.txt", "r");
-				
-			
 				showAll(file);
 				fclose(file);
 				
@@ -263,9 +264,7 @@ int main() {
     			}
     			
     			fclose(file);
-    			sleep(1);
     			fclose(temp);
-    			sleep(1);
 				remove("savedata.txt");
 				rename("temp.txt", "savedata.txt");
 				
@@ -326,9 +325,7 @@ int main() {
         			}
     			}
     			fclose(file);
-    			sleep(1);
     			fclose(temp);
-    			sleep(1);
 				remove("savedata.txt");
 				rename("temp.txt", "savedata.txt");
 				break;

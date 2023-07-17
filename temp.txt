@@ -1,5 +1,0 @@
-
-4, df, dfg, dfg, dfg, df, df, dfg;
-5, ccccc, ccc, cc, cc, cc, cc, cc;
-6, 151, 151, 151, 151, 151, 151, 151;
-7, 1, 1, 1, 1, 1, 1, 1;
