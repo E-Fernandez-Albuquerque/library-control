@@ -18,7 +18,6 @@ void bookCreate(FILE *file, char title[], char author[], char year[], char pages
 	printf("Salvando informacoes.");
 	sleep(1);
 	printf(".");
-	sleep(1);
 
 	
 	// REMOVENDO QUEBRA DE LINHA DO FGETS
@@ -98,8 +97,11 @@ void bookDataPrint(book b){
 void bookView(FILE *file, char id[]) {
 	book b;
 	b = getBook(file, id);
-	
-	bookDataPrint(b);
+	if (strlen(b.title) == 0){
+		printf("\nLivro nao identificado com base em ID.\n");
+	} else {
+		bookDataPrint(b);		
+	}
 }
 
 

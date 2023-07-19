@@ -186,7 +186,7 @@ int main() {
             			fscanf(file, "%c", &ch);
             			
             			
-            			printf("1- Titulo: %s\n2 - Autor: %s\n3 - Editora: %s\n4 - Ano de publicacao: %s\n5 - Numero de paginas: %s\n6 - Lingua: %s\n7 - ISBN: %s\n8 - Cancelar\n", bk.title, bk.author, bk.publisher, bk.year, bk.pages, bk.language, bk.isbn);
+            			printf("1 - Titulo: %s\n2 - Autor: %s\n3 - Editora: %s\n4 - Ano de publicacao: %s\n5 - Numero de paginas: %s\n6 - Lingua: %s\n7 - ISBN: %s\n8 - Cancelar\n", bk.title, bk.author, bk.publisher, bk.year, bk.pages, bk.language, bk.isbn);
             			printf("\nQual informacao deseja modificar? ");
             			
             			scanf("%d", &update_option);
